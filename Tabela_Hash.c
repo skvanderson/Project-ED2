@@ -89,3 +89,24 @@ void listar_contatos(TabelaHash tabela) {
         }
     }
 }
+
+void remover_contato(TabelaHash *tabela, char *nome) {
+    int posicao_inicial, posicao_atual;
+    posicao_inicial = hash_divisao(nome);
+    posicao_atual = posicao_inicial;
+
+    while (tabela->tabela[posicao_atual].ocupado) {
+        if (strcmp(tabela->tabela[posicao_atual].contato.nome, nome) == 0) {
+            tabela->tabela[posicao_atual].ocupado = 0;
+            printf("Contato Removido\n");
+            return;
+        }
+        posicao_atual = (posicao_atual + 1) % TAMANHO_TABELA;
+        if (posicao_atual == posicao_inicial) {
+            printf("Contato não encontrado.\n");
+            return;
+        }
+    }
+
+    printf("Contato não encontrado.\n");
+}

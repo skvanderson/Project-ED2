@@ -47,3 +47,19 @@ void inserir_contato(TabelaHash *tabela, Contato contato) {
     strcpy(tabela->tabela[posicao_atual].contato.telefone, contato.telefone);
     tabela->tabela[posicao_atual].ocupado = 1;
 }
+
+Contato buscar_contato(TabelaHash tabela, char *chave) {
+    int telefone_valido = 1;
+    for (int i = 0; i < strlen(chave); i++) {
+        if (i == 5 || i == 10) {
+            if (chave[i] != '-') {
+                telefone_valido = 0;
+                break;
+            }
+        } else {
+            if (!isdigit(chave[i])) {
+                telefone_valido = 0;
+                break;
+            }
+        }
+    }

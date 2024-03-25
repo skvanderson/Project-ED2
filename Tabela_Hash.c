@@ -63,3 +63,20 @@ Contato buscar_contato(TabelaHash tabela, char *chave) {
             }
         }
     }
+
+if (telefone_valido) {
+        for (int i = 0; i < TAMANHO_TABELA; i++) {
+            if (tabela.tabela[i].ocupado && strcmp(tabela.tabela[i].contato.telefone, chave) == 0) {
+                return tabela.tabela[i].contato;
+            }
+        }
+    } else {
+        for (int i = 0; i < TAMANHO_TABELA; i++) {
+            if (tabela.tabela[i].ocupado && strcmp(tabela.tabela[i].contato.nome, chave) == 0) {
+                return tabela.tabela[i].contato;
+            }
+        }
+    }
+    Contato contato_vazio = {"", ""};
+    return contato_vazio;
+}

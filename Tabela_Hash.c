@@ -43,9 +43,9 @@ void inserir_contato(TabelaHash *tabela, Contato contato) {
             return;
         }
     }
-    strcpy(tabela->tabela[posicao_atual].contato.nome, contato.nome);
-    strcpy(tabela->tabela[posicao_atual].contato.telefone, contato.telefone);
-    tabela->tabela[posicao_atual].ocupado = 1;
+        strcpy(tabela->tabela[posicao_atual].contato.nome, contato.nome);
+        strcpy(tabela->tabela[posicao_atual].contato.telefone, contato.telefone);
+        tabela->tabela[posicao_atual].ocupado = 1;
 }
 
 Contato buscar_contato(TabelaHash tabela, char *chave) {
@@ -67,16 +67,25 @@ Contato buscar_contato(TabelaHash tabela, char *chave) {
 if (telefone_valido) {
         for (int i = 0; i < TAMANHO_TABELA; i++) {
             if (tabela.tabela[i].ocupado && strcmp(tabela.tabela[i].contato.telefone, chave) == 0) {
-                return tabela.tabela[i].contato;
+            return tabela.tabela[i].contato;
             }
         }
     } else {
         for (int i = 0; i < TAMANHO_TABELA; i++) {
             if (tabela.tabela[i].ocupado && strcmp(tabela.tabela[i].contato.nome, chave) == 0) {
-                return tabela.tabela[i].contato;
+            return tabela.tabela[i].contato;
             }
         }
     }
     Contato contato_vazio = {"", ""};
     return contato_vazio;
+}
+
+void listar_contatos(TabelaHash tabela) {
+    printf("Lista de Contatos:\n");
+    for (int i = 0; i < TAMANHO_TABELA; i++) {
+        if (tabela.tabela[i].ocupado) {
+        printf("Nome: %s, Telefone: %s\n", tabela.tabela[i].contato.nome, tabela.tabela[i].contato.telefone);
+        }
+    }
 }

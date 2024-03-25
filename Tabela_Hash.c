@@ -18,3 +18,12 @@ void inicializar_tabela(TabelaHash *tabela){
     }
     
 }
+
+int contato_existe(TabelaHash tabela, Contato contato) {
+    for (int i = 0; i < TAMANHO_TABELA; i++) {
+        if (tabela.tabela[i].ocupado && strcmp(tabela.tabela[i].contato.nome, contato.nome) == 0 && strcmp(tabela.tabela[i].contato.telefone, contato.telefone) == 0) {
+            return 1;
+        }
+    }
+    return 0;
+}

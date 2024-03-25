@@ -27,3 +27,23 @@ int contato_existe(TabelaHash tabela, Contato contato) {
     }
     return 0;
 }
+
+void inserir_contato(TabelaHash *tabela, Contato contato) {
+    int posicao_inicial, posicao_atual;
+    posicao_inicial = hash_divisao(contato.nome);
+    posicao_atual = posicao_inicial;
+    if (contato_existe(*tabela, contato)) {
+        printf("Contato já está salvo na sua agenda.\n");
+        return;
+    }
+    while (tabela->tabela[posicao_atual].ocupado) {
+        posicao_atual = (posicao_atual + 1) % TAMANHO_TABELA;
+        if (posicao_atual == posicao_inicial) {
+            printf("Tabela cheia. Não foi possível inserir o contato.\n");
+            return;
+        }
+    }
+    strcpy(tabela->tabela[posicao_atual].contato.nome, contato.nome);
+    strcpy(tabela->tabela[posicao_atual].contato.telefone, contato.telefone);
+    tabela->tabela[posicao_atual].ocupado = 1;
+}
